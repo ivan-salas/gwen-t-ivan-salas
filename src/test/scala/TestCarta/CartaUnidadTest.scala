@@ -3,12 +3,15 @@ package TestCarta
 import gwent.PackageCartas.CartaUnidad
 import munit.FunSuite
 
+//CLASE DE TEST PARA CARTAUNIDAD
 class CartaUnidadTest extends FunSuite {
   var cartaUnidad1: CartaUnidad = _
+  var cartaUnidad1_Comparar: CartaUnidad = _
   var cartaUnidad2: CartaUnidad = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     cartaUnidad1 = new CartaUnidad("Hanuman", fuerza = 10)
+    cartaUnidad1_Comparar = new CartaUnidad("Hanuman", fuerza = 10)
     cartaUnidad2 = new CartaUnidad("Thor",fuerza = 20)
   }
 
@@ -32,9 +35,21 @@ class CartaUnidadTest extends FunSuite {
   test("Un carta no puede tener un valor nulo de fuerza") {
     assertNotEquals(cartaUnidad1.fuerza,0,clue="")
     assertNotEquals(cartaUnidad2.fuerza,0,clue="")
-
-
   }
 
-  //NOTA AL AYUDANTE: NO SE INCLUYEN MAS TESTS PORQUE LA CLASIFICACION Y EFECTO DE LAS CARTAS NO SE PIDEN IMPLEMENTAR
+  test("dos cartas con los mismo valores deberian ser iguales") {
+    assertEquals(cartaUnidad1, cartaUnidad1_Comparar)
+    assertEquals(cartaUnidad1_Comparar, cartaUnidad1)
+    assertNotEquals(cartaUnidad1, cartaUnidad2)
+    assertNotEquals(cartaUnidad2, cartaUnidad1)
+  }
+
+  test("toString retorna el mismo valor para objetos iguales") {
+    assertEquals(cartaUnidad1.toString(), cartaUnidad1_Comparar.toString())
+  }
+
+  test("hashCode() retorna el mismo valor para objetos iguales") {
+    assertEquals(cartaUnidad1.hashCode(), cartaUnidad1_Comparar.hashCode())
+  }
+  
 }
