@@ -1,6 +1,10 @@
 package cl.uchile.dcc
 package gwent.PackageCartas
 
+import gwent.PackageTablero.ZonasJugadores.AbstractZonaPlayers
+
+import cl.uchile.dcc.gwent.PackageTablero.Tablero
+
 //DEFINICION CLASE ABSTRACTA: AbstractCarta
 abstract class AbstractCarta(val nombre: String) extends Carta with Equals {
   override def equals(that: Any): Boolean = {
@@ -15,10 +19,14 @@ abstract class AbstractCarta(val nombre: String) extends Carta with Equals {
     }
   }
   override def toString: String = { // No confundir con getClass.getName,
-                                      // solo considerar que entrega el nombre de la clase.
+    // solo considerar que entrega el nombre de la clase.
     s"""Class: ${getClass.getName}
        |Name: $nombre""".stripMargin // stripMargin se coloca automáticamente cuando
-                                      // queremos hacer un String de más de una línea.
+    // queremos hacer un String de más de una línea.
 
   }
+  
+  def JugarEnZona(zona: AbstractZonaPlayers,carta: Carta, tablero: Tablero): Unit = {
+  }
+
 }

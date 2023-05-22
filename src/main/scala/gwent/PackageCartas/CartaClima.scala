@@ -1,5 +1,8 @@
 package cl.uchile.dcc
 package gwent.PackageCartas
+import cl.uchile.dcc.gwent.PackageTablero.Tablero
+import cl.uchile.dcc.gwent.PackageTablero.ZonasJugadores.AbstractZonaPlayers
+
 import java.util.Objects
 
 //DEFINICION DE CLASE: CartaClima
@@ -23,6 +26,11 @@ class CartaClima(nombre: String) extends AbstractCarta(nombre) {
     } else {
       false
     }
+  }
+
+  override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {
+    val NewCartaClima: CartaClima = carta.asInstanceOf[CartaClima]
+    tablero.zonaClima.jugarCartaClima(NewCartaClima)
   }
 
 

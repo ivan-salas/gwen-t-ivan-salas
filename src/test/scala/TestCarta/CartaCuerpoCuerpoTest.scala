@@ -1,18 +1,18 @@
 package cl.uchile.dcc
 package TestCarta
-import gwent.PackageCartas.CartaUnidad
+import gwent.PackageCartas.CartaCuerpoCuerpo
 import munit.FunSuite
 
 //CLASE DE TEST PARA CARTAUNIDAD
-class CartaUnidadTest extends FunSuite {
-  var cartaUnidad1: CartaUnidad = _
-  var cartaUnidad1_Comparar: CartaUnidad = _
-  var cartaUnidad2: CartaUnidad = _
+class CartaCuerpoCuerpoTest extends FunSuite {
+  var cartaUnidad1: CartaCuerpoCuerpo = _
+  var cartaUnidad1_Comparar: CartaCuerpoCuerpo = _
+  var cartaUnidad2: CartaCuerpoCuerpo = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    cartaUnidad1 = new CartaUnidad("Hanuman", fuerza = 10)
-    cartaUnidad1_Comparar = new CartaUnidad("Hanuman", fuerza = 10)
-    cartaUnidad2 = new CartaUnidad("Thor",fuerza = 20)
+    cartaUnidad1 = new CartaCuerpoCuerpo("Hanuman", fuerza = 10)
+    cartaUnidad1_Comparar = new CartaCuerpoCuerpo("Hanuman", fuerza = 10)
+    cartaUnidad2 = new CartaCuerpoCuerpo("Thor",fuerza = 20)
   }
 
   // PRIMEROS TESTS: CASO NORMAL Y BORDE PARA EL NOMBRE DE UNA CARTA DE UNIDAD

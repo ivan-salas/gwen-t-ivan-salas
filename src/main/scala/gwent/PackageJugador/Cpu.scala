@@ -1,8 +1,10 @@
 package cl.uchile.dcc
 package gwent.PackageJugador
 
-import gwent.PackageCartas.Carta
-import cl.uchile.dcc.gwent.PackageBarajas.{Mazo,Mano}
+import gwent.PackageCartas.{AbstractCarta, Carta}
+
+import cl.uchile.dcc.gwent.PackageBarajas.{Mano, Mazo}
+import cl.uchile.dcc.gwent.PackageTablero.Tablero
 
 import java.util.Objects
 
@@ -36,5 +38,10 @@ class Cpu(gemas: Int,mazo: Mazo,mano: Mano) extends AbstractJugador(gemas,mazo,m
   def ObtenerNumeroCartasMano(): Int = {
     mano.CartasMembers.length
   }
+
+  def jugarCarta(tablero: Tablero, carta: AbstractCarta): Unit = {
+    carta.JugarEnZona(tablero.zonaCpu,carta,tablero)
+  }
+
 
 }

@@ -3,6 +3,10 @@ package gwent.PackageJugador
 
 import gwent.PackageBarajas.{Mano, Mazo}
 
+import cl.uchile.dcc.gwent.PackageCartas.Carta
+import cl.uchile.dcc.gwent.PackageTablero.Tablero
+import cl.uchile.dcc.gwent.PackageTablero.ZonasJugadores.{AbstractZonaPlayers, TraitZona}
+
 //DEFINICION CLASE ABSTRACTA: AbstractJugador
 //La clase AbstractJugador incluye los valores de gemas, su mazo y su mano
 abstract class AbstractJugador(var gemas: Int, var mazo: Mazo, var mano: Mano) extends Jugador with Equals{
@@ -31,6 +35,8 @@ abstract class AbstractJugador(var gemas: Int, var mazo: Mazo, var mano: Mano) e
   def robarCarta(): Unit = {
     mano.addMember(mazo.obtenerCarta()) //Tambien se define la funcion robarCarta, que roba una carta del mazo y la añade a la mano
   }
+
+
 
 
 

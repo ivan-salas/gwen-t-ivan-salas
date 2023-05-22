@@ -1,9 +1,10 @@
 package cl.uchile.dcc
 package gwent.PackageJugador
 
-import gwent.PackageCartas.Carta
+import gwent.PackageCartas.{AbstractCarta, Carta}
 
-import cl.uchile.dcc.gwent.PackageBarajas.{Mazo,Mano}
+import cl.uchile.dcc.gwent.PackageBarajas.{Mano, Mazo}
+import cl.uchile.dcc.gwent.PackageTablero.Tablero
 
 import java.util.Objects
 
@@ -27,4 +28,9 @@ class Usuario(val nombre: String, gemas: Int, mazo: Mazo, mano: Mano) extends Ab
     mazo.CartasMembers.length /*Tambien se definen los mismos metodos para obtener el numero de cartas en el mazo y la mano*/ }
   def ObtenerNumeroCartasMano(): Int = {
     mano.CartasMembers.length}
+
+  
+  def jugarCarta(tablero: Tablero, carta: AbstractCarta): Unit = {
+    carta.JugarEnZona(tablero.zonaUsuario, carta, tablero)
+  }
 }

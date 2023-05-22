@@ -4,7 +4,7 @@ import munit.FunSuite
 import gwent.PackageJugador.{Cpu, Jugador, Usuario}
 
 import cl.uchile.dcc.gwent.PackageBarajas.{Mano, Mazo}
-import cl.uchile.dcc.gwent.PackageCartas.{Carta, CartaClima, CartaUnidad}
+import cl.uchile.dcc.gwent.PackageCartas.{AbstractCarta, Carta, CartaClima, CartaCuerpoCuerpo}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -16,10 +16,10 @@ class CpuTest extends FunSuite {
   var Usuario_IceBear: Usuario = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val carta1: Carta = new CartaUnidad("Hanuman", 50)
-    val carta2: Carta = new CartaClima("Lluvia")
-    val cartasMazo = ArrayBuffer[Carta](carta1, carta2) // Crea un ArrayBuffer de cartas
-    val cartasMano = ArrayBuffer[Carta](carta1, carta2) // Crea un ArrayBuffer de cartas
+    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50)
+    val carta2: AbstractCarta = new CartaClima("Lluvia")
+    val cartasMazo = ArrayBuffer[AbstractCarta](carta1, carta2) // Crea un ArrayBuffer de cartas
+    val cartasMano = ArrayBuffer[AbstractCarta](carta1, carta2) // Crea un ArrayBuffer de cartas
     val mazo_test = new Mazo(cartasMazo) // Pasa el ArrayBuffer de cartas a la clase Mazo
     val mano_test = new Mano(cartasMano) // Pasa el ArrayBuffer de cartas a la clase Mano
     CPU1 = new Cpu( gemas = 2, mazo = mazo_test, mano = mano_test)
