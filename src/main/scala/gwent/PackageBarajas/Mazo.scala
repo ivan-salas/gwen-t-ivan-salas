@@ -6,9 +6,20 @@ import gwent.PackageCartas.{AbstractCarta, Carta, CartaClima}
 import java.util.Objects
 import scala.collection.mutable.ArrayBuffer
 
-//DEFINICION DE LA CLASE MAZO:
-//MAZO SON LAS MAXIMO 25 CARTAS DE CUALQUIER CLASIFICACION DE LAS CUALES EL JUGADOR PUEDE ROBAR PARA TENER EN SU MANO
+
+/**
+ * Clase que representa un mazo de cartas.
+ * @param CartasMembers ArrayBuffer de cartas que componen la baraja (son maximo 25 cartas de cualquier clasificación).
+ */
 class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(CartasMembers) {
+  
+  def getCartasMazo: ArrayBuffer[AbstractCarta] = {//getter de las cartas del mazo deben ser maximo 25
+    if (CartasMembers.length > 25) {
+      throw new IllegalArgumentException("El mazo no puede tener mas de 25 cartas")
+    }
+    else CartasMembers
+  }
+  
 
   //canEqual cumple la misma funcion de antes
   override def canEqual(that: Any): Boolean = {
@@ -18,7 +29,7 @@ class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[Mazo]
-      (this eq other) || (CartasMembers == other.CartasMembers)
+      (this eq other) || (CartasMembers == other.getCartasMazo)
     } else {
       false
     }
@@ -38,9 +49,12 @@ class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
     CartasMembers.remove(CartasMembers.indexOf(member))
   }
 
-  //obtenerCarta entrega una carta del mazo
-  //al entregar la carta, esta se quita del mazo
-  //consideramos siempre quitar la primera carta, asumiendo que el mazo esta dado vuelta y uno va sacando de arriba
+  /**
+   * Funcion que entrega una carta del mazo.
+   * al entregar la carta, esta se quita del mazo.
+   * Por simplicidad se considera quitar siempre la primera carta mazo.
+   * @return AbstractCarta que es la carta que se entrega.
+   */
   def obtenerCarta(): AbstractCarta = {
     val carta = CartasMembers.head
     CartasMembers.remove(0)

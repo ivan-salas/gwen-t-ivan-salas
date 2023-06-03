@@ -9,6 +9,11 @@ import java.util.Objects
 //CartaClima es uno de los dos tipos de carta que existen
 //Como todavia no se deben realizar los efectos en el tablero
 //solo consideramos que CartaClima tiene un nombre unico que la identifica
+/**
+ * Clase que representa una carta de clima.
+ * CartaClima es uno de los dos tipos de carta que existen
+ * @param nombre Nombre de la carta.
+ */
 class CartaClima(nombre: String) extends AbstractCarta(nombre) {
 
   override def hashCode(): Int = {

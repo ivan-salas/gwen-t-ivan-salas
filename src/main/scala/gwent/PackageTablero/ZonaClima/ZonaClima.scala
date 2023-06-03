@@ -4,7 +4,6 @@ package gwent.PackageTablero.ZonaClima
 import gwent.PackageCartas.{Carta, CartaClima}
 /**
  * Clase que representa la zona de la carta de clima en el tablero de juego.
- *
  * @param cartaClima La carta de clima actual en la zona de clima.
  */
 class ZonaClima(var cartaClima: CartaClima) {

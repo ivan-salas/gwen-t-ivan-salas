@@ -32,11 +32,11 @@ class CpuTest extends FunSuite {
   //PRIMEROS TESTS: CASO NORMAL Y CASO BORDE PARA EL CONTADOR DE GEMAS DE UN JUGADOR CPU
   //NOTA: NO SE INCLUYE TEST PARA NOMBRE PORQUE CPU NO NECESITA UN NOMBRE PERSONALIZADO
   test("La CPU no puede tener más de 2 gemas") {
-    assert(CPU1.gemas <= 2)
+    assert(CPU1.getGemas <= 2)
   }
 
   test("La CPU no puede tener gemas negativas") {
-    assert( CPU1.gemas >= 0)
+    assert( CPU1.getGemas >= 0)
   }
 
   //SEGUNDOS TEST: CASO NORMAL Y CASO BORDE PARA MAZO DE CARTAS DE UN JUGADOR CPU

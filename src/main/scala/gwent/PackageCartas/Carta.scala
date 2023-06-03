@@ -1,7 +1,9 @@
 package cl.uchile.dcc
 package gwent.PackageCartas
 
-//DEFINICION DE TRAIT: Carta
+
+/** Trait que define una carta.
+ */
 trait Carta {
 
 }

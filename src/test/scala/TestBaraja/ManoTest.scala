@@ -47,7 +47,7 @@ class ManoTest extends FunSuite{
     val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mano1.addMember(carta3)
-    assert(Mano1.CartasMembers == Seq(carta1, carta2, carta3))
+    assert(Mano1.getCartasMano == Seq(carta1, carta2, carta3))
   }
 
   test("removeMember quita una carta de la mano") {
@@ -55,7 +55,7 @@ class ManoTest extends FunSuite{
     val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mano1.removeMember(carta2)
-    assert(Mano1.CartasMembers == Seq(carta1) )
+    assert(Mano1.getCartasMano == Seq(carta1) )
   }
 
 }

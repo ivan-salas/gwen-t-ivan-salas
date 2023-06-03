@@ -15,7 +15,7 @@ class CartaCuerpoCuerpoTest extends FunSuite {
     cartaUnidad2 = new CartaCuerpoCuerpo("Thor",fuerza = 20)
   }
 
-  // PRIMEROS TESTS: CASO NORMAL Y BORDE PARA EL NOMBRE DE UNA CARTA DE UNIDAD
+  // PRIMEROS TESTS: CASO NORMAL Y BORDE PARA EL NOMBRE DE UNA CARTA CUERPO A CUERPO
   test("Una carta debe tener el nombre") {
     assertEquals(cartaUnidad1.nombre, "Hanuman")
     assertEquals(cartaUnidad2.nombre, "Thor")

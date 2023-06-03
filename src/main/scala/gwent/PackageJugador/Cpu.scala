@@ -8,9 +8,12 @@ import cl.uchile.dcc.gwent.PackageTablero.Tablero
 
 import java.util.Objects
 
-//DEFINICION DE CLASE: Cpu
-//Existen dos tipos de jugadores en el juego
-//Cpu y usuario
+/**
+ * Clase que representa a la CPU del juego (Existen 2 tipos de jugadores CPU y Usuario)
+ * @param gemas Cantidad de gemas que posee la CPU
+ * @param mazo Mazo de la CPU
+ * @param mano Mano de la CPU
+ */
 class Cpu(gemas: Int,mazo: Mazo,mano: Mano) extends AbstractJugador(gemas,mazo,mano) {
 
   //De nuevo se definen canEqual, equals y hascode
@@ -32,16 +35,24 @@ class Cpu(gemas: Int,mazo: Mazo,mano: Mano) extends AbstractJugador(gemas,mazo,m
 
   //Tambien se hace una funcion para obtener el numero de cartas del mazo y de la mano
   def ObtenerNumeroCartasMazo(): Int = {
-    mazo.CartasMembers.length
+    mazo.getCartasMazo.length
   }
 
   def ObtenerNumeroCartasMano(): Int = {
-    mano.CartasMembers.length
+    mano.getCartasMano.length
   }
 
+  /**
+   * Funcion que permite a la CPU jugar una carta en el tablero en su zona asignada.
+   * Es decir que, la carta se jugara en la zona de la CPU.
+   * @param tablero Tablero en el que se esta jugando
+   * @param carta Carta que se quiere jugar
+   */
   def jugarCarta(tablero: Tablero, carta: AbstractCarta): Unit = {
     carta.JugarEnZona(tablero.zonaCpu,carta,tablero)
   }
+  
+
 
 
 }

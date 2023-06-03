@@ -47,7 +47,7 @@ class MazoTest extends FunSuite{
     val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mazo1.addMember(carta3)
-    assert(Mazo1.CartasMembers == Seq(carta1, carta2, carta3))
+    assert(Mazo1.getCartasMazo == Seq(carta1, carta2, carta3))
   }
 
   test("removeMember quita una carta al mazo") {
@@ -55,7 +55,7 @@ class MazoTest extends FunSuite{
     val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mazo1.removeMember(carta2)
-    assert(Mazo1.CartasMembers == Seq(carta1))
+    assert(Mazo1.getCartasMazo == Seq(carta1))
   }
 
   test("obtener carta deberia removerle una carta al mazo (que posteriormente se da a mano)") {
@@ -63,7 +63,7 @@ class MazoTest extends FunSuite{
     val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mazo1.obtenerCarta()
-    val largoMazo = Mazo1.CartasMembers.length
+    val largoMazo = Mazo1.getCartasMazo.length
     assert(largoMazo == 1)
   }
 

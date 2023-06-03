@@ -6,6 +6,11 @@ import cl.uchile.dcc.gwent.PackageTablero.ZonasJugadores.AbstractZonaPlayers
 
 import java.util.Objects
 
+/**
+ * Clase que representa una carta de rango
+ * @param nombre Nombre de la carta
+ * @param fuerza Fuerza de la carta
+ */
 class CartaRango(nombre: String, val fuerza: Int) extends AbstractCarta(nombre){
   //De nuevo se definen canEqual y equals de la misma forma
   override def canEqual(that: Any): Boolean = {
@@ -19,6 +24,10 @@ class CartaRango(nombre: String, val fuerza: Int) extends AbstractCarta(nombre){
     } else {
       false
     }
+  }
+
+  override def hashCode(): Int = {
+    Objects.hash(classOf[CartaRango], nombre)
   }
 
   override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {

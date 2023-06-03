@@ -50,7 +50,10 @@ class TableroTest extends FunSuite {
   }
 
   test("Se agrega correctamente una carta cuerpo a la zona CPU") {
-    val carta1 = CPU1.mano.CartasMembers.head
+    //Asumimos que al metodo jugar carta se le pasa una carta directamente
+    //Quizas se deba crear otra función que saque alguna carta de la mano del jugador y la juegue
+    val carta1 = CPU1.sacarCartaDeMano("Hanuman") //Por eso hicimos la funcion sacarCartaDeMano :)
+    //En el futuro se puede mejorar la funcion para que pueda sacar una carta al azar en el caso de CPU
     CPU1.jugarCarta(tablero, carta1)
     assertEquals(tablero.zonaCpu.filaCuerpoCuerpo.CartasFila.length, 1)
     assertEquals(tablero.zonaCpu.filaCuerpoCuerpo.CartasFila.head, carta1)

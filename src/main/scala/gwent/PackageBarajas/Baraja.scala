@@ -1,7 +1,9 @@
 package cl.uchile.dcc
 package gwent.PackageBarajas
 
-//DEFINICION DE TRAIT: Baraja
+/** Trait que define  una baraja de cartas del juego.
+ *
+ */
 trait Baraja {
 
 }

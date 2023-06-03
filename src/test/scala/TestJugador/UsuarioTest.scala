@@ -38,11 +38,11 @@ class UsuarioTest extends FunSuite {
 
   //SEGUNDOS TESTS: CASO NORAML Y CASO BORDE PARA CONTADOR DE GEMAS DE UN JUGADOR USUARIO
   test("Un Usuario no puede tener más de 2 gemas") {
-    assert(Usuario_IceBear.gemas <= 2)
+    assert(Usuario_IceBear.getGemas <= 2)
   }
 
   test("Un Usuario no puede tener gemas negativas") {
-    assert( Usuario_IceBear.gemas >= 0)
+    assert( Usuario_IceBear.getGemas >= 0)
   }
 
   //TERCEROS TEST: CASO NORMAL Y CASO BORDE PARA MAZO DE CARTAS DE UN JUGADOR USUARIO
@@ -86,11 +86,16 @@ class UsuarioTest extends FunSuite {
   test("robarCarta debe quitar una carta del mazo y darsela a la mano") {
     val largo_previo_mazo=Usuario_IceBear.ObtenerNumeroCartasMazo()
     val largo_previo_mano=Usuario_IceBear.ObtenerNumeroCartasMano()
-    Usuario_IceBear.robarCarta()
+    Usuario_IceBear.robarCartaDeMazo()
     val largo_post_mazo=Usuario_IceBear.ObtenerNumeroCartasMazo()
     val largo_post_mano=Usuario_IceBear.ObtenerNumeroCartasMano()
     assert(largo_previo_mazo==largo_post_mazo+1)
     assert(largo_previo_mano==largo_post_mano-1)
+  }
+
+  test("test para el setter de gemas"){
+    Usuario_IceBear.setGemas(3)
+    assertEquals(Usuario_IceBear.getGemas,3)
   }
 
 }

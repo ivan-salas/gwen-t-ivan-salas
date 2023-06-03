@@ -5,8 +5,11 @@ import gwent.PackageCartas.{AbstractCarta, Carta}
 
 import scala.collection.mutable.ArrayBuffer
 
-//DEFINICION DE CLASE ABSTRACTA: AbstractBaraja
-abstract class AbstractBaraja(val CartasMembers: ArrayBuffer[AbstractCarta]) extends Baraja with Equals {
+/**
+ * Clase abstracta que define una baraja de cartas.
+ * @param CartasMembers ArrayBuffer de cartas que componen la baraja.
+ */
+abstract class AbstractBaraja(private val CartasMembers: ArrayBuffer[AbstractCarta]) extends Baraja with Equals {
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) { // Preguntamos si el obj que estamos comparando es del mismo tipo de esta
                           // clase.
