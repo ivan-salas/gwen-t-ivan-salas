@@ -33,7 +33,11 @@ class CartaCuerpoCuerpo(nombre: String, val fuerza: Int) extends AbstractCarta(n
   }
 
   override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {
-    zona.jugarCartaCuerpoCuerpo(carta)
+    zona.jugarCartaCuerpoCuerpo(this)
+  }
+
+  override def sumarFuerza(): Int = {
+    this.fuerza
   }
 
 }

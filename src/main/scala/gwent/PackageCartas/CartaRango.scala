@@ -31,7 +31,11 @@ class CartaRango(nombre: String, val fuerza: Int) extends AbstractCarta(nombre){
   }
 
   override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {
-    zona.jugarCartaRango(carta)
+    zona.jugarCartaRango(this)
+  }
+
+  override def sumarFuerza(): Int = {
+    this.fuerza
   }
 
 }

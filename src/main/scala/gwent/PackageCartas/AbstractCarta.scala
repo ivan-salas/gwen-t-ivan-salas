@@ -38,5 +38,7 @@ abstract class AbstractCarta(val nombre: String) extends Carta with Equals {
    */
   def JugarEnZona(zona: AbstractZonaPlayers,carta: Carta, tablero: Tablero): Unit = {
   }
+  
+  
 
 }

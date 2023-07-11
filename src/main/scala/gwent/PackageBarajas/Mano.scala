@@ -58,4 +58,12 @@ class Mano(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
     carta.get
   }
 
+  def sumaFuerza(): Int = {
+    var suma = 0
+    for (carta <- CartasMembers) {
+      suma += carta.sumarFuerza()
+    }
+    suma
+  }
+
 }

@@ -34,8 +34,11 @@ class CartaClima(nombre: String) extends AbstractCarta(nombre) {
   }
 
   override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {
-    val NewCartaClima: CartaClima = carta.asInstanceOf[CartaClima]
-    tablero.zonaClima.jugarCartaClima(NewCartaClima)
+    tablero.zonaClima.jugarCartaClima(this)
+  }
+
+  override def sumarFuerza(): Int = {
+    0
   }
 
 

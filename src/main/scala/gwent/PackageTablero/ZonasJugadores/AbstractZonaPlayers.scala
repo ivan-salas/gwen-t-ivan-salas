@@ -18,20 +18,31 @@ abstract class AbstractZonaPlayers(val filaRango: FilaRango,val filaCuerpoCuerpo
    *
    * @param carta La carta cuerpo a cuerpo a jugar.
    */
-  def jugarCartaCuerpoCuerpo(carta: Carta): Unit = {}
+  def jugarCartaCuerpoCuerpo(carta: Carta): Unit = {
+    this.filaCuerpoCuerpo.CartasFila.addOne(elem = carta)
+  }
+  
   /**
    * Permite jugar una carta de asedio en la zona de jugadores.
    *
    * @param carta La carta de asedio a jugar.
    */
-  def jugarCartaAsedio(carta: Carta): Unit = {}
+  def jugarCartaAsedio(carta: Carta): Unit = {
+    this.filaAsedio.CartasFila.addOne(elem = carta)
+  }
 
   /**
    * Permite jugar una carta de rango en la zona de jugadores.
    *
    * @param carta La carta de rango a jugar.
    */
-  def jugarCartaRango(carta: Carta):Unit={}
+  def jugarCartaRango(carta: Carta):Unit={
+    this.filaRango.CartasFila.addOne(elem = carta)
+  }
+
+  def sumaFuerza(): Int = {
+    filaRango.sumaFuerza() + filaCuerpoCuerpo.sumaFuerza() + filaAsedio.sumaFuerza()
+  }
 
 }
 

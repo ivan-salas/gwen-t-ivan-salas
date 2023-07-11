@@ -60,4 +60,10 @@ class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
     CartasMembers.remove(0)
     carta
   }
+  
+  def setearMazo(mazo: Mazo): Unit = {
+    CartasMembers.clear()
+    CartasMembers.addAll(mazo.getCartasMazo)
+  }
+  
 }

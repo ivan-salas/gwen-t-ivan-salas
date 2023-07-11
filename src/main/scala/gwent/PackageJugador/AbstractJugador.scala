@@ -16,7 +16,7 @@ import scala.annotation.unused
  * @param mazo Mazo de cartas del jugador
  * @param mano  Mano de cartas del jugador
  */
-abstract class AbstractJugador(private var gemas: Int, private var mazo: Mazo, private var mano: Mano) extends Jugador with Equals{
+abstract class AbstractJugador( var gemas: Int,var mazo: Mazo,var mano: Mano) extends Jugador with Equals{
 
 // De nuevo se definen equals y tostring
   override def equals(that: Any): Boolean = {

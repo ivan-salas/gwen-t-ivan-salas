@@ -9,7 +9,7 @@ import scala.collection.mutable.ArrayBuffer
  * Clase abstracta que define una baraja de cartas.
  * @param CartasMembers ArrayBuffer de cartas que componen la baraja.
  */
-abstract class AbstractBaraja(private val CartasMembers: ArrayBuffer[AbstractCarta]) extends Baraja with Equals {
+abstract class AbstractBaraja( val CartasMembers: ArrayBuffer[AbstractCarta]) extends Baraja with Equals {
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) { // Preguntamos si el obj que estamos comparando es del mismo tipo de esta
                           // clase.
@@ -28,6 +28,12 @@ abstract class AbstractBaraja(private val CartasMembers: ArrayBuffer[AbstractCar
        |Name: $CartasMembers""".stripMargin // stripMargin se coloca automáticamente cuando
     // queremos hacer un String de más de una línea.
 
+  }
+
+  def obtenerCartaAzar(): AbstractCarta = {
+    val carta = CartasMembers(scala.util.Random.nextInt(CartasMembers.length))
+    CartasMembers.remove(CartasMembers.indexOf(carta))
+    carta
   }
 
 }

@@ -9,5 +9,12 @@ import scala.collection.mutable.ArrayBuffer
  * @param CartasFila El conjunto de cartas en la fila.
  */
 class AbstractFila(val CartasFila: ArrayBuffer[Carta]) {
+  def sumaFuerza(): Int ={
+    var suma = 0
+    for (carta <- CartasFila){
+      suma += carta.sumarFuerza()
+    }
+    suma
+  }
 
 }

@@ -11,18 +11,4 @@ import cl.uchile.dcc.gwent.PackageCartas.Carta
  * @param filaAsedio       Fila de cartas de asedio de la zona de la USUARIO.
  */
 class ZonaUsuario(filaRango: FilaRango, filaCuerpoCuerpo: FilaCuerpoCuerpo, filaAsedio: FilaAsedio)
-  extends AbstractZonaPlayers(filaRango, filaCuerpoCuerpo, filaAsedio) {
-
-  override def jugarCartaCuerpoCuerpo(carta: Carta): Unit = {
-    this.filaCuerpoCuerpo.CartasFila.addOne(elem = carta)
-  }
-
-  override def jugarCartaAsedio(carta: Carta): Unit = {
-    this.filaAsedio.CartasFila.addOne(elem = carta)
-  }
-
-  override def jugarCartaRango(carta: Carta): Unit = {
-    this.filaRango.CartasFila.addOne(elem = carta)
-  }
-  
-}
+  extends AbstractZonaPlayers(filaRango, filaCuerpoCuerpo, filaAsedio) {}
