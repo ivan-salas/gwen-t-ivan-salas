@@ -14,8 +14,8 @@ class MazoTest extends FunSuite{
   var Mazo2: Mazo = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50)
-    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
+    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50,0)
+    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30,0)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     val cartasMazo1 = ArrayBuffer[AbstractCarta](carta1, carta2) // Crea un ArrayBuffer de cartas
     val cartasMazo2 = ArrayBuffer[AbstractCarta](carta1,carta2, carta3)
@@ -43,28 +43,34 @@ class MazoTest extends FunSuite{
   }
 
   test("addMember añade una carta al mazo") {
-    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50)
-    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
+    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50,0)
+    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30,0)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mazo1.addMember(carta3)
     assert(Mazo1.getCartasMazo == Seq(carta1, carta2, carta3))
   }
 
   test("removeMember quita una carta al mazo") {
-    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50)
-    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
+    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50,0)
+    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30,0)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mazo1.removeMember(carta2)
     assert(Mazo1.getCartasMazo == Seq(carta1))
   }
 
   test("obtener carta deberia removerle una carta al mazo (que posteriormente se da a mano)") {
-    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50)
-    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30)
+    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50,0)
+    val carta2: AbstractCarta = new CartaCuerpoCuerpo("Ganesha", 30,0)
     val carta3: AbstractCarta = new CartaClima("Lluvia")
     Mazo1.obtenerCarta()
     val largoMazo = Mazo1.getCartasMazo.length
     assert(largoMazo == 1)
+  }
+
+  test("setearMazo(mazo: Mazo) setea un mazo en otro"){
+    Mazo1.setearMazo(Mazo2)
+    //Ahora Mazo1 es igual a Mazo2
+    assertEquals(Mazo1, Mazo2)
   }
 
 

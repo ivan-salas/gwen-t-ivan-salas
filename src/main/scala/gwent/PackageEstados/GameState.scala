@@ -51,7 +51,7 @@ class GameState protected(val context: GameController){
     transitionError(targetState = "TurnOfUser")
   }
 
-  /** Transition the game state to [[UserTurn]] or [[CPUTurn]].
+  /** Transition the game state to [[CPUTurn]].
    *
    * This method should be overridden by subclasses that allow this transition.
    *
@@ -61,34 +61,42 @@ class GameState protected(val context: GameController){
     transitionError(targetState = "PassTurn")
   }
 
-  def UserPlayOneCard(): Unit = {
+  /** Transition the game to [[CPUTurn]]*/
+  def UserPlayOneCard(indiceCarta: Int): Unit = {
     transitionError(targetState = "PlayOneCard")
   }
 
-  def UserPlayCardAgain(): Unit = {
+  /** Transition the game to [[UserTurn]]*/
+  def UserPlayCardAgain(indiceCarta: Int): Unit = {
     transitionError(targetState = "PlayCardAgain")
   }
 
+  /** Transition the game to [[UserTurn]]*/
   def CpuPassTurn(): Unit = {
     transitionError(targetState = "PassTurn")
   }
 
+  /** Transition the game to [[UserTurn]]*/
   def CpuPlayOneCard(): Unit = {
     transitionError(targetState = "PlayOneCard")
   }
 
+  /** Transition the game to [[CPUTurn]]*/
   def CpuPlayCardAgain(): Unit = {
     transitionError(targetState = "PlayCardAgain")
   }
 
+  /** Transition the game to [[PlayNextRound]]*/
   def PlayNextRound(): Unit = {
     transitionError(targetState = "PlayNextRound")
   }
 
+  /** Transition the game to [[GameEnds]]*/
   def OutOfGems(): Unit = {
     transitionError(targetState = "OutOfGems")
   }
 
+  /** Does the action of the state*/
   def doAction(): Unit = {
     // do nothing
   }

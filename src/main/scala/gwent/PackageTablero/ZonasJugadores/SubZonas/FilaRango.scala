@@ -10,6 +10,4 @@ import scala.collection.mutable.ArrayBuffer
  * @param CartasFila El conjunto de cartas en la fila rango.
  */
 class FilaRango(CartasFila: ArrayBuffer[Carta])
-  extends AbstractFila(CartasFila) {
-
-}
+  extends AbstractFila(CartasFila) {}

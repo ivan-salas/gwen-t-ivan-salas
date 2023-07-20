@@ -20,6 +20,8 @@ class GemObserver(player: AbstractJugador, controlador: GameController) {
     if (player.gemas == 0) {
       controlador.OutOfGems()
     }
+    
+    
   }
   
 }

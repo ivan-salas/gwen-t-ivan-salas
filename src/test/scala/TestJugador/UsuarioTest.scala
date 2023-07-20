@@ -15,7 +15,7 @@ class UsuarioTest extends FunSuite {
   var Usuario_Vacio: Usuario = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50)
+    val carta1: AbstractCarta = new CartaCuerpoCuerpo("Hanuman", 50,0)
     val carta2: AbstractCarta = new CartaClima("Lluvia")
     val cartasMazo = ArrayBuffer[AbstractCarta](carta1,carta2) // Crea un ArrayBuffer de cartas
     val cartasMano = ArrayBuffer[AbstractCarta](carta1,carta2) // Crea un ArrayBuffer de cartas

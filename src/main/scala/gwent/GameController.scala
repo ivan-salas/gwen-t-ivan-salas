@@ -2,8 +2,8 @@ package cl.uchile.dcc
 package gwent
 
 import gwent.PackageBarajas.{Mano, Mazo}
-import gwent.PackageCartas.{AbstractCarta, Carta}
-import gwent.PackageEstados.{CardsShufNPick, GameState, StartGame, UserTurn}
+import gwent.PackageCartas.{AbstractCarta, Carta, CartaClima}
+import gwent.PackageEstados.{CardsShufNPick, GameEnds, GameState, GameTurnsObserver, StartGame, UserTurn}
 import gwent.PackageJugador.{AbstractJugador, Cpu, GemObserver, Usuario}
 import gwent.PackageTablero.ZonaClima.ZonaClima
 import gwent.PackageTablero.ZonasJugadores.SubZonas.{FilaAsedio, FilaCuerpoCuerpo, FilaRango}
@@ -38,12 +38,15 @@ class GameController(val userInterface: UserInterface) {
   var CanPlayMoreTurns: Boolean = false
 
   /** 5. Tablero del juego */
-  var tableroJuego: Tablero = _
   var zonaClimaJuego: ZonaClima = _
   var zonaCpuJuego: ZonaCpu = _
   var zonaUsuarioJuego: ZonaUsuario = _
-  
+  var tableroJuego: Tablero = _
 
+  /** 6. Numero de turnos en la ronda
+   * Cada ronda consta de 10 turnos que se van gastando entre el usuario y la cpu
+   * */
+  var GameTurnsObserver: GameTurnsObserver = _
 
   // A continuación definimos los metodos del controlador:
 
@@ -60,56 +63,72 @@ class GameController(val userInterface: UserInterface) {
 
   /** 3. Metodo para ir al turno del usuario. */
   def TurnOfUser(): Unit = {
-    val CartasEnMano = usuarioJuego.mano.CartasMembers.map(_.nombre) // Obtenemos las cartas en mano del usuario
-    val IndiceCarta = userInterface.promptSelection(CartasEnMano) // Le pedimos al usuario que elija el indice de la carta de su mano
-    val CartaElegida = usuarioJuego.mano.CartasMembers(IndiceCarta) // Obtenemos la carta elegida llamando al indice del arraybuffer
-
-    //Jugamos la carta escogida
-    usuarioJuego.jugarCarta(tableroJuego, CartaElegida) // Jugamos la carta elegida
-
     state.TurnOfUSer() // Ahora estamos en el estado UserTurn
   }
 
   /** 4. Metodo para que Usuario pase de turno.
    * */
   def UserPassTurn(): Unit = {
+    // Aqui estamos en el estado UserTurn
     state.UserPassTurn()
+    state.doAction() //Esto sirve para updatear los observers
   }
 
   /** 5. Metodo para que Usuario juegue una carta.
    * */
   def UserPlayOneCard(): Unit = {
-    state.UserPlayOneCard()
+    // Aqui estamos en el estado UserTurn
+    
+    val CartasEnMano = usuarioJuego.mano.CartasMembers.map(_.nombre) // Obtenemos las cartas en mano del usuario
+    val IndiceCarta = userInterface.promptSelection(CartasEnMano) // Le pedimos al usuario que elija el indice de la carta de su mano
+    state.UserPlayOneCard(IndiceCarta)
+    state.doAction() //Esto sirve para updatear los observers
   }
 
   /** 6. Metodo para Usuario juegue una carta de nuevo.
+   *  Este metodo solo se puede ejecutar si CanPlayMoreTurns es true
    * */
   def UserPlayCardAgain(): Unit = {
-    state.UserPlayCardAgain()
+    if(!CanPlayMoreTurns) throw new Exception("No puedes jugar otra carta en este turno")
+    // Aqui estamos en el estado UserTurn
+    
+    val CartasEnMano = usuarioJuego.mano.CartasMembers.map(_.nombre) // Obtenemos las cartas en mano del usuario
+    val IndiceCarta = userInterface.promptSelection(CartasEnMano) // Le pedimos al usuario que elija el indice de la carta de su mano
+    state.UserPlayCardAgain(IndiceCarta)
+    state.doAction() //Esto sirve para updatear los observers
   }
 
   /** 7. Metodo para que CPU pase de turno.
    * */
   def CpuPassTurn(): Unit = {
+    // Aqui estamos en el estado UserTurn
     state.CpuPassTurn()
+    state.doAction() //Esto sirve para updatear los observers
   }
 
   /** 8. Metodo para que Cpu juegue una carta.
    * */
   def CpuPlayOneCard(): Unit = {
+    // Aqui estamos en el estado UserTurn
     state.CpuPlayOneCard()
+    state.doAction() //Esto sirve para updatear los observers
   }
 
   /** 9. Metodo para Cpu juegue una carta de nuevo.
    * */
   def CpuPlayCardAgain(): Unit = {
+    if (!CanPlayMoreTurns) throw new Exception("No puedes jugar otra carta en este turno")
+    // Aqui estamos en el estado UserTurn
     state.CpuPlayCardAgain()
+    state.doAction() //Esto sirve para updatear los observers
   }
 
   /** 10. Metodo para jugar la siguiente ronda.
    * */
   def PlayNextRound(): Unit = {
-    state.PlayNextRound()
+    state.PlayNextRound() //Pasamos al estado PlayNextRound
+    state.doAction() // Hacemos doAction() para que el estado haga su accion (En este caso son varias cositas)
+    // el doAction de este estado llama por ejemplo al gemObserver y pude que el juego termine aqui
   }
 
   /** 11. Metodo para cuando un jugador esta OutOfGems
@@ -122,6 +141,14 @@ class GameController(val userInterface: UserInterface) {
    * */
   def doAction(): Unit = {
     state.doAction()
+  }
+  
+  //Funciones extras
+  
+  /* Getter del estado del controlador
+  * */
+  def getState: GameState = {
+    state
   }
 
 }

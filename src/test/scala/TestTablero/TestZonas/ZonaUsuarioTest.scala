@@ -17,9 +17,9 @@ class ZonaUsuarioTest extends FunSuite {
   var zonaUsuario: ZonaUsuario = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    val cartasRango = ArrayBuffer[Carta](new CartaRango("Carta1", 5), new CartaRango("Carta2", 6))
-    val cartasCuerpoCuerpo = ArrayBuffer[Carta](new CartaCuerpoCuerpo("Carta3", 7), new CartaCuerpoCuerpo("Carta4", 8))
-    val cartasAsedio = ArrayBuffer[Carta](new CartaAsedio("Carta5", 9), new CartaAsedio("Carta6", 10))
+    val cartasRango = ArrayBuffer[Carta](new CartaRango("Carta1", 5,0), new CartaRango("Carta2", 6,0))
+    val cartasCuerpoCuerpo = ArrayBuffer[Carta](new CartaCuerpoCuerpo("Carta3", 7,0), new CartaCuerpoCuerpo("Carta4", 8,0))
+    val cartasAsedio = ArrayBuffer[Carta](new CartaAsedio("Carta5", 9,0), new CartaAsedio("Carta6", 10,0))
 
     filaRango = new FilaRango(cartasRango)
     filaCuerpoCuerpo = new FilaCuerpoCuerpo(cartasCuerpoCuerpo)
@@ -35,19 +35,19 @@ class ZonaUsuarioTest extends FunSuite {
   }
 
   test("Jugar una carta de rango debe agregarla a la fila de rango") {
-    val carta = new CartaRango("Carta7", 11)
+    val carta = new CartaRango("Carta7", 11,0)
     zonaUsuario.jugarCartaRango(carta)
     assert(zonaUsuario.filaRango.CartasFila.contains(carta))
   }
 
   test("Jugar una carta cuerpo a cuerpo debe agregarla a la fila de cuerpo a cuerpo") {
-    val carta = new CartaCuerpoCuerpo("Carta8", 12)
+    val carta = new CartaCuerpoCuerpo("Carta8", 12,0)
     zonaUsuario.jugarCartaCuerpoCuerpo(carta)
     assert(zonaUsuario.filaCuerpoCuerpo.CartasFila.contains(carta))
   }
 
   test("Jugar una carta de asedio debe agregarla a la fila de asedio") {
-    val carta = new CartaAsedio("Carta9", 13)
+    val carta = new CartaAsedio("Carta9", 13,0)
     zonaUsuario.jugarCartaAsedio(carta)
     assert(zonaUsuario.filaAsedio.CartasFila.contains(carta))
   }

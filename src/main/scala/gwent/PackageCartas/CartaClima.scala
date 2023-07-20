@@ -14,7 +14,7 @@ import java.util.Objects
  * CartaClima es uno de los dos tipos de carta que existen
  * @param nombre Nombre de la carta.
  */
-class CartaClima(nombre: String) extends AbstractCarta(nombre) {
+class CartaClima(nombre: String) extends AbstractCarta(nombre,fuerza = 0, fuerzaTemp = 0) {
 
   override def hashCode(): Int = {
     Objects.hash(classOf[CartaClima], nombre)
@@ -33,9 +33,15 @@ class CartaClima(nombre: String) extends AbstractCarta(nombre) {
     }
   }
 
-  override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {
-    tablero.zonaClima.jugarCartaClima(this)
+  override def JugarEnZonaUsuario(carta: Carta,tablero: Tablero): Unit = {
+    tablero.zonaClima.jugarCartaClima(this,tablero)
   }
+
+  override def JugarEnZonaCpu(carta: Carta, tablero: Tablero): Unit = {
+    tablero.zonaClima.jugarCartaClima(this,tablero)
+  }
+  
+  
 
   override def sumarFuerza(): Int = {
     0

@@ -11,9 +11,9 @@ class CartaAsedioTest extends FunSuite {
   var cartaAsedio2: CartaAsedio = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    cartaAsedio1 = new CartaAsedio("Ranger", fuerza = 10)
-    cartaAsedio1_Comparar = new CartaAsedio("Ranger", fuerza = 10)
-    cartaAsedio2 = new CartaAsedio("Pikachu", fuerza = 20)
+    cartaAsedio1 = new CartaAsedio("Ranger", fuerza = 10,0)
+    cartaAsedio1_Comparar = new CartaAsedio("Ranger", fuerza = 10,0)
+    cartaAsedio2 = new CartaAsedio("Pikachu", fuerza = 20,0)
   }
 
   // PRIMEROS TESTS: CASO NORMAL Y BORDE PARA EL NOMBRE DE UNA CARTA ASEDIO

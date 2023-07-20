@@ -10,9 +10,9 @@ class CartaRangoTest extends FunSuite {
     var cartaRango2: CartaRango = _
 
     override def beforeEach(context: BeforeEach): Unit = {
-      cartaRango1 = new CartaRango("Ranger", fuerza = 10)
-      cartaRango1_Comparar = new CartaRango("Ranger", fuerza = 10)
-      cartaRango2 = new CartaRango("Pikachu", fuerza = 20)
+      cartaRango1 = new CartaRango("Ranger", fuerza = 10,0)
+      cartaRango1_Comparar = new CartaRango("Ranger", fuerza = 10,0)
+      cartaRango2 = new CartaRango("Pikachu", fuerza = 20,0)
     }
 
     // PRIMEROS TESTS: CASO NORMAL Y BORDE PARA EL NOMBRE DE UNA CARTA RANGO

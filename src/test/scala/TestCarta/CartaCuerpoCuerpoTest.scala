@@ -10,9 +10,9 @@ class CartaCuerpoCuerpoTest extends FunSuite {
   var cartaUnidad2: CartaCuerpoCuerpo = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    cartaUnidad1 = new CartaCuerpoCuerpo("Hanuman", fuerza = 10)
-    cartaUnidad1_Comparar = new CartaCuerpoCuerpo("Hanuman", fuerza = 10)
-    cartaUnidad2 = new CartaCuerpoCuerpo("Thor",fuerza = 20)
+    cartaUnidad1 = new CartaCuerpoCuerpo("Hanuman", fuerza = 10,0)
+    cartaUnidad1_Comparar = new CartaCuerpoCuerpo("Hanuman", fuerza = 10,0)
+    cartaUnidad2 = new CartaCuerpoCuerpo("Thor",fuerza = 20,0)
   }
 
   // PRIMEROS TESTS: CASO NORMAL Y BORDE PARA EL NOMBRE DE UNA CARTA CUERPO A CUERPO

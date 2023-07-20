@@ -3,7 +3,7 @@ package gwent.PackageEstados
 
 import gwent.GameController
 
-import cl.uchile.dcc.gwent.PackageJugador.{Cpu, Usuario}
+import cl.uchile.dcc.gwent.PackageJugador.{Cpu, GemObserver, Usuario}
 import cl.uchile.dcc.gwent.PackageTablero.Tablero
 
 import scala.io.StdIn
@@ -17,6 +17,7 @@ class CPUTurn(context: GameController) extends GameState(context) {
   val usuarioJuego: Usuario = context.usuarioJuego
   val cpuJuego: Cpu = context.cpuJuego
   val tableroJuego: Tablero = context.tableroJuego
+  val cpuGemObserver: GemObserver = context.cpuGemObserver
 
 
   /**
@@ -42,40 +43,54 @@ class CPUTurn(context: GameController) extends GameState(context) {
    */
   override def CpuPlayOneCard(): Unit = {
     val sumaFuerzaCpu = cpuJuego.mano.sumaFuerza() + tableroJuego.zonaCpu.sumaFuerza() // Suma de fuerza de las cartas en mano y en campo de batalla
-    val sumaFuerzaOponente = usuarioJuego.mano.sumaFuerza() + tableroJuego.zonaUsuario.sumaFuerza() // Suma de fuerza de las cartas en mano y en campo de batalla del oponente
+    val sumaFuerzaOponente = tableroJuego.zonaUsuario.sumaFuerza() // Suma de fuerza de las cartas en campo de batalla del oponente
 
-    if (sumaFuerzaCpu > sumaFuerzaOponente){
+    // Si la suma de fuerza de las cartas que tiene en el campo de batalla y en mano es mayor que la del campo de
+    // batalla del oponente, entonces juega una carta al azar de su mano
+    if (sumaFuerzaCpu > sumaFuerzaOponente) {
       val cartaJugar = cpuJuego.mano.obtenerCartaAzar()
       cpuJuego.jugarCarta(tablero = tableroJuego, carta = cartaJugar)
     }
-    // Para el else vamos a tener que definir una clase parecida a "mano" pero que solo guarde las cartas climas que tiene un player
-
-    context.currentPlayer = context.usuarioJuego //ahora el turno es de la CPU
-    context.state = new UserTurn(context) //cambiamos el estado a CpuTurn
+    else { // Si la suma de fuerza es menor que la del oponente, se juega una carta clima al azar
+      val cartaJugar = cpuJuego.mano.obtenerCartaClimaAzar()
+      cpuJuego.jugarCarta(tablero = tableroJuego, carta = cartaJugar)
+    }
+    
+    context.GameTurnsObserver.turnos -= 1 //se resta un turno
+    context.currentPlayer = context.usuarioJuego //ahora el turno es del usuario
+    context.state = new UserTurn(context) //cambiamos el estado a UserTurn
   }
 
   /**
    * Metodo que se llama cuando el usuario quiere jugar una carta de nuevo
    */
-  override def UserPlayCardAgain(): Unit = {
+  override def CpuPlayCardAgain(): Unit = {
     val sumaFuerzaCpu = cpuJuego.mano.sumaFuerza() + tableroJuego.zonaCpu.sumaFuerza() // Suma de fuerza de las cartas en mano y en campo de batalla
-    val sumaFuerzaOponente = usuarioJuego.mano.sumaFuerza() + tableroJuego.zonaUsuario.sumaFuerza() // Suma de fuerza de las cartas en mano y en campo de batalla del oponente
+    val sumaFuerzaOponente = tableroJuego.zonaUsuario.sumaFuerza() // Suma de fuerza de las cartas en campo de batalla del oponente
 
+    // Si la suma de fuerza de las cartas que tiene en el campo de batalla y en mano es mayor que la del campo de
+    // batalla del oponente, entonces juega una carta al azar de su mano
     if (sumaFuerzaCpu > sumaFuerzaOponente) {
       val cartaJugar = cpuJuego.mano.obtenerCartaAzar()
       cpuJuego.jugarCarta(tablero = tableroJuego, carta = cartaJugar)
     }
+    else { // Si la suma de fuerza es menor que la del oponente, se juega una carta clima al azar
+      val cartaJugar = cpuJuego.mano.obtenerCartaClimaAzar()
+      cpuJuego.jugarCarta(tablero = tableroJuego, carta = cartaJugar)
+    }
 
-    context.currentPlayer = context.cpuJuego //ahora el turno es de la CPU
-    context.state = new CPUTurn(context) //cambiamos el estado a CpuTurn
-  }
-
-  override def OutOfGems(): Unit = {
-    context.state = new GameEnds(context)
+    context.GameTurnsObserver.turnos -= 1 //se resta un turno
+    context.currentPlayer = context.cpuJuego //sigue siendo el turno de la CPU
+    context.state = new CPUTurn(context) //seguimos en el estado a CpuTurn
   }
 
   override def PlayNextRound(): Unit = {
-    context.state = new PlayRound(context)
+    context.state = new PlayNextRound(context)
+  }
+  
+  override def doAction(): Unit = {
+    //Llamemos a la instancia de game observer para comunicar si el usuario tiene gemas o no
+    context.GameTurnsObserver.update()
   }
 
 }

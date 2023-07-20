@@ -11,7 +11,7 @@ import java.util.Objects
  * @param nombre Nombre de la carta
  * @param fuerza Fuerza de la carta
  */
-class CartaRango(nombre: String, val fuerza: Int) extends AbstractCarta(nombre){
+class CartaRango(nombre: String, fuerza: Int, fuerzaTemp: Int) extends AbstractCarta(nombre,fuerza,fuerzaTemp){
   //De nuevo se definen canEqual y equals de la misma forma
   override def canEqual(that: Any): Boolean = {
     that.isInstanceOf[CartaRango]
@@ -30,12 +30,12 @@ class CartaRango(nombre: String, val fuerza: Int) extends AbstractCarta(nombre){
     Objects.hash(classOf[CartaRango], nombre)
   }
 
-  override def JugarEnZona(zona: AbstractZonaPlayers, carta: Carta,tablero: Tablero): Unit = {
-    zona.jugarCartaRango(this)
+  override def JugarEnZonaUsuario(carta: Carta,tablero: Tablero): Unit = {
+    tablero.zonaUsuario.jugarCartaRango(carta)
   }
 
-  override def sumarFuerza(): Int = {
-    this.fuerza
+  override def JugarEnZonaCpu(carta: Carta, tablero: Tablero): Unit = {
+    tablero.zonaCpu.jugarCartaRango(carta)
   }
 
 }

@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.PackageBarajas
 
-import gwent.PackageCartas.{AbstractCarta, Carta}
+import gwent.PackageCartas.{AbstractCarta, Carta, CartaClima}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -30,10 +30,12 @@ abstract class AbstractBaraja( val CartasMembers: ArrayBuffer[AbstractCarta]) ex
 
   }
 
+  /** Metodo para obtener una carta al azar de la baraja. */
   def obtenerCartaAzar(): AbstractCarta = {
     val carta = CartasMembers(scala.util.Random.nextInt(CartasMembers.length))
     CartasMembers.remove(CartasMembers.indexOf(carta))
     carta
   }
+  
 
 }

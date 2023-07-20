@@ -5,6 +5,7 @@ import gwent.PackageCartas.{AbstractCarta, Carta, CartaClima}
 
 import java.util.Objects
 import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
 
 /**
@@ -14,6 +15,7 @@ import scala.collection.mutable.ArrayBuffer
 
 class Mano(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(CartasMembers) {
 
+  /** metodo para obtener el ArrayBuffer de la mano*/
   def getCartasMano: ArrayBuffer[AbstractCarta] = { //getter de las cartas de la mano
     CartasMembers 
   }
@@ -42,7 +44,7 @@ class Mano(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
   }
 
   //removeMember quita una carta de la mano del jugador
-  def removeMember(member: AbstractCarta): Unit = {
+  def removeMember(member: Carta): Unit = {
     CartasMembers.remove(CartasMembers.indexOf(member))
   }
 
@@ -58,12 +60,30 @@ class Mano(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
     carta.get
   }
 
+  /** sumaFuerza() retorna el valor de la fuerza de las cartas en la mano*/
   def sumaFuerza(): Int = {
     var suma = 0
     for (carta <- CartasMembers) {
       suma += carta.sumarFuerza()
     }
     suma
+  }
+
+  /** obtenerCartaClimaAzar() retorna una carta clima al azar de la mano
+   * Si no hay una carta clima en la mano, se retorna una carta al azar de la mano
+   * */
+  def obtenerCartaClimaAzar(): Carta = {
+    val cartasClima = CartasMembers.collect { case carta: CartaClima => carta }
+    if (cartasClima.nonEmpty) {
+      val carta = cartasClima(Random.nextInt(cartasClima.length))
+      CartasMembers.remove(CartasMembers.indexOf(carta)) // Eliminamos la carta de la mano
+      carta
+    } 
+    else { // Si no hay cartas clima, retornamos cualquier carta al azar de la mano
+      val carta = CartasMembers(scala.util.Random.nextInt(CartasMembers.length))
+      CartasMembers.remove(CartasMembers.indexOf(carta)) // Eliminamos la carta de la mano
+      carta
+    }
   }
 
 }

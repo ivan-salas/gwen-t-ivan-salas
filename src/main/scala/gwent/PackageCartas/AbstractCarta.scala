@@ -10,7 +10,7 @@ import cl.uchile.dcc.gwent.PackageTablero.Tablero
  * Clase abstracta que representa una carta del juego.
  * @param nombre nombre de la carta.
  */
-abstract class AbstractCarta(val nombre: String) extends Carta with Equals {
+abstract class AbstractCarta(nombre: String, fuerza: Int, fuerzaTemp: Int) extends Carta(nombre,fuerza,fuerzaTemp) with Equals {
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) { // Preguntamos si el obj que estamos comparando es del mismo tipo de esta
                           // clase. 
@@ -29,16 +29,4 @@ abstract class AbstractCarta(val nombre: String) extends Carta with Equals {
     // queremos hacer un String de más de una línea.
 
   }
-
-  /**
-   * Método que permite jugar una carta en una zona de un jugador.
-   * @param zona zona en la que se quiere jugar la carta (puede ser ZonaCpu o ZonaUsuario).
-   * @param carta carta que se quiere jugar.
-   * @param tablero tablero en el que se está jugando.
-   */
-  def JugarEnZona(zona: AbstractZonaPlayers,carta: Carta, tablero: Tablero): Unit = {
-  }
-  
-  
-
 }

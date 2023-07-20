@@ -3,7 +3,9 @@ package gwent.PackageTablero.ZonasJugadores
 
 import gwent.PackageTablero.ZonasJugadores.SubZonas.{FilaAsedio, FilaCuerpoCuerpo, FilaRango}
 
-import cl.uchile.dcc.gwent.PackageCartas.Carta
+import cl.uchile.dcc.gwent.PackageCartas.{Carta, CartaCuerpoCuerpo}
+
+import scala.language.postfixOps
 /**
  * Clase abstracta que representa una zona de jugadores en el tablero de juego.
  *
@@ -13,35 +15,22 @@ import cl.uchile.dcc.gwent.PackageCartas.Carta
  */
 abstract class AbstractZonaPlayers(val filaRango: FilaRango,val filaCuerpoCuerpo: FilaCuerpoCuerpo, val filaAsedio: FilaAsedio )
   extends TraitZona {
-  /**
-   * Permite jugar una carta cuerpo a cuerpo en la zona de jugadores.
-   *
-   * @param carta La carta cuerpo a cuerpo a jugar.
-   */
-  def jugarCartaCuerpoCuerpo(carta: Carta): Unit = {
-    this.filaCuerpoCuerpo.CartasFila.addOne(elem = carta)
-  }
-  
-  /**
-   * Permite jugar una carta de asedio en la zona de jugadores.
-   *
-   * @param carta La carta de asedio a jugar.
-   */
-  def jugarCartaAsedio(carta: Carta): Unit = {
-    this.filaAsedio.CartasFila.addOne(elem = carta)
-  }
 
-  /**
-   * Permite jugar una carta de rango en la zona de jugadores.
-   *
-   * @param carta La carta de rango a jugar.
-   */
-  def jugarCartaRango(carta: Carta):Unit={
-    this.filaRango.CartasFila.addOne(elem = carta)
-  }
-
+  /**Metodo para devolver la fuerza acumulada de cartas en una zona*/
   def sumaFuerza(): Int = {
     filaRango.sumaFuerza() + filaCuerpoCuerpo.sumaFuerza() + filaAsedio.sumaFuerza()
+  }
+
+  /**Metodo para limpiar una zona del tablero*/
+  def CleanZona(): Unit = {
+    this.filaRango.CleanFila()
+    this.filaCuerpoCuerpo.CleanFila()
+    this.filaAsedio.CleanFila()
+  }
+
+  /**Metodo para obtener el numero de cartas en una zona del tablero*/
+  def NumCartasZona(): Int = {
+    this.filaRango.NumCartasFila() + this.filaCuerpoCuerpo.NumCartasFila() + this.filaAsedio.NumCartasFila()
   }
 
 }

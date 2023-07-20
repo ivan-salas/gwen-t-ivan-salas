@@ -12,7 +12,8 @@ import scala.collection.mutable.ArrayBuffer
  * @param CartasMembers ArrayBuffer de cartas que componen la baraja (son maximo 25 cartas de cualquier clasificación).
  */
 class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(CartasMembers) {
-  
+
+  /**Metodo para obtener el ArrayBuffer del mazo*/
   def getCartasMazo: ArrayBuffer[AbstractCarta] = {//getter de las cartas del mazo deben ser maximo 25
     if (CartasMembers.length > 25) {
       throw new IllegalArgumentException("El mazo no puede tener mas de 25 cartas")
@@ -39,12 +40,12 @@ class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
     Objects.hash(classOf[Mazo], CartasMembers)
   }
 
-  // addMember añade una carta al mazo del jugador
+  /** addMember añade una carta al mazo del jugador*/
   def addMember(member: AbstractCarta): Unit = {
     CartasMembers.addOne(member)
   }
 
-  // reomveMember quita una carta especifica del mazo del jugador
+  /** reomveMember quita una carta especifica del mazo del jugador */
   def removeMember(member: AbstractCarta): Unit = {
     CartasMembers.remove(CartasMembers.indexOf(member))
   }
@@ -60,7 +61,11 @@ class Mazo(CartasMembers: ArrayBuffer[AbstractCarta]) extends AbstractBaraja(Car
     CartasMembers.remove(0)
     carta
   }
-  
+
+  /** Metodo para setear el mazo a un mazo especifico
+   * @param mazo El mazo con el cual se quiere setear al mazo actual
+   * @return Unit
+   * */
   def setearMazo(mazo: Mazo): Unit = {
     CartasMembers.clear()
     CartasMembers.addAll(mazo.getCartasMazo)

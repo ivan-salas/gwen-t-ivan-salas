@@ -43,7 +43,7 @@ class Usuario(val nombre: String, gemas: Int, mazo: Mazo, mano: Mano) extends Ab
    * @param tablero tablero donde se va a jugar la cart
    * @param carta carta que se va a jugar
    */
-  def jugarCarta(tablero: Tablero, carta: AbstractCarta): Unit = {
-    carta.JugarEnZona(tablero.zonaUsuario, carta, tablero)
+  def jugarCarta(tablero: Tablero, carta: Carta): Unit = {
+    carta.JugarEnZonaUsuario(carta, tablero)
   }
 }

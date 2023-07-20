@@ -48,8 +48,8 @@ class Cpu(gemas: Int,mazo: Mazo,mano: Mano) extends AbstractJugador(gemas,mazo,m
    * @param tablero Tablero en el que se esta jugando
    * @param carta Carta que se quiere jugar
    */
-  def jugarCarta(tablero: Tablero, carta: AbstractCarta): Unit = {
-    carta.JugarEnZona(tablero.zonaCpu,carta,tablero)
+  def jugarCarta(tablero: Tablero, carta: Carta): Unit = {
+    carta.JugarEnZonaCpu(carta,tablero)
   }
   
 

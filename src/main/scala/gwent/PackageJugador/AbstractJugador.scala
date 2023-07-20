@@ -86,10 +86,9 @@ abstract class AbstractJugador( var gemas: Int,var mazo: Mazo,var mano: Mano) ex
     }
     else gemas = int
   }
-
-
-
-
-
+  
+  def quitarGema(): Unit = {
+    gemas -= 1
+  }
 
 }

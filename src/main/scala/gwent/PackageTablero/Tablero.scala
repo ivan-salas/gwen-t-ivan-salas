@@ -15,6 +15,21 @@ import cl.uchile.dcc.gwent.PackageTablero.ZonasJugadores.{ZonaCpu, ZonaUsuario}
  * @param zonaUsuario  La zona del usuario del tablero.
  */
 class Tablero(val zonaClima: ZonaClima, val zonaCpu: ZonaCpu, val zonaUsuario: ZonaUsuario) {
+  
+  /**Metodo para limpiar un tablero de las cartas que tiene
+   * Sirve al empezar una nueva ronda
+   * */
+  def CleanTablero(): Unit = {
+    this.zonaCpu.CleanZona()
+    this.zonaUsuario.CleanZona()
+    this.zonaClima.CleanZona()
+  }
+  
+  /**Metodo para contar el numero de cartas en el tablero
+   * Sirve para los tests*/
+  def NumCartasTablero(): Int = {
+    this.zonaCpu.NumCartasZona() + this.zonaUsuario.NumCartasZona() + this.zonaClima.NumCartasZona()
+  }
 
 }
 
